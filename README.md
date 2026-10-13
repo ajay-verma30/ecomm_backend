@@ -98,12 +98,12 @@ Typical API operations include:
 
 | Method | Endpoint | Purpose |
 |---|---|---|
-| POST | `/api/auth/register` | Register a user |
+| POST | `/api/auth/new` | Register a user |
 | POST | `/api/auth/login` | Authenticate a user |
+| POST | `/api/address/new` | Add address for the user |
+| GET | `/api/address/` | Retrieve user addresses |
 | GET | `/api/products` | Retrieve products |
-| GET | `/api/products/:id` | Retrieve a product |
-| POST | `/api/orders` | Create an order |
-| GET | `/api/orders/:id` | Retrieve an order |
+| POST | `/api/orders/new` | Create an order |
 | POST | `/api/payments/checkout` | Initiate a payment |
 
 These are example routes. Confirm the actual paths and HTTP methods in your route files.
@@ -174,9 +174,3 @@ Test the application in this sequence:
 - Do not rely solely on frontend success messages to mark orders as paid.
 - Use Stripe test mode during development.
 
-following should be in the .env file 
- 
-```PORT=5000
-DATABASE_URL=YOUR_POSTGRES_TRANSACTION_POOL_URL
-JWT_SECRET=ANY_hash_key
-STRIPE_SECRET_KEY=Your SK_TEST key```
