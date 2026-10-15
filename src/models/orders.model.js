@@ -1,4 +1,3 @@
-
 const pool = require("../../db/conn");
 const { nanoid } = require("nanoid");
 
@@ -104,7 +103,7 @@ const createOrder = async (orderData) => {
 
 const getOrderById = async(order_id, user_id) => {
     const result = await pool.query(
-        `SELECT id, total, payment_status
+        `SELECT id, total, payment_status, stripe_payment_intent_id
         FROM orders 
         WHERE id = $1 and user_id = $2`,
         [order_id, user_id]
@@ -113,7 +112,24 @@ const getOrderById = async(order_id, user_id) => {
     return result.rows[0];
 }
 
+const getOrderItemById = async(order_id, order_item_id, user_id) =>{
+    const result = await pool.query(
+        `SELECT
+        oi.id,
+        oi.unit_price,
+        oi.order_id
+    FROM order_items oi
+    JOIN orders o ON oi.order_id = o.id
+    WHERE
+        oi.order_id = $1
+        AND oi.id = $2
+        AND o.user_id = $3;`, [order_id, order_item_id, user_id]
+    );
+    return result.rows[0];
+}
+
 module.exports = {
     createOrder,
-    getOrderById
+    getOrderById,
+    getOrderItemById
 };

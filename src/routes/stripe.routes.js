@@ -10,4 +10,10 @@ router.post(
     stripeController.createPayment
 );
 
+router.post(
+    "/create-refund", 
+    authMiddleware, 
+    stripeController.createRefunds
+);
+
 module.exports = router;
