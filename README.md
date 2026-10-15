@@ -9,8 +9,6 @@ A Node.js and Express backend for an e-commerce application with PostgreSQL data
 - **PostgreSQL / Supabase** — Database
 - **Stripe** — Payment processing using PaymentIntents
 - **JWT** — Authentication
-- **bcrypt** — Password hashing
-- **Zod** — Request validation
 
 ## Features
 
